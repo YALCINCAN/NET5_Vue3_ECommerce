@@ -28,6 +28,16 @@ Username : admin
 Password : 159357456qW
 ```
 
+Checkout Page Credit Card Information : 
+
+```sh
+CardName : "John Doe"
+CardName : "5528790000000008"
+ExpirationMonth : "12"
+ExpirationYear : "2030"
+Cvc : "123"
+```
+
 ## How To Start Quasar Project
 
 Project requires [Quasar Framework](https://quasar.dev) 
