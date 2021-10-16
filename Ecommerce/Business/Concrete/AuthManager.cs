@@ -109,7 +109,7 @@ namespace Business.Concrete
             var user = await _userManager.FindByNameAsync(model.UserName);
             if (user == null)
             {
-                throw new ApiException(404, Messages.UserNameOrPasswordIsIncorrect);
+                throw new ApiException(400, Messages.UserNameOrPasswordIsIncorrect);
             }
             if (!user.EmailConfirmed)
             {
