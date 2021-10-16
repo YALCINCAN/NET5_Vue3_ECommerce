@@ -1,6 +1,6 @@
 # ASP NET Core with VueJS 3 Composition API (Quasar Framework) ECommerce Project
 
-![Ecommerce Compressed](https://user-images.githubusercontent.com/32078573/137524642-b0d8f54b-5964-4a01-88c5-f5d6a8117027.gif)
+<img alt="Ecommerce Gif" src="assets/Ecommerce.gif"> </img>
 
 ## Features
 - Entity Framework Core – Code First 
