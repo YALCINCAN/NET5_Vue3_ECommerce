@@ -6,7 +6,7 @@
 - Entity Framework Core – Code First 
 - Response Wrappers
 - Action Filters
-- Pagination,Search,Filter
+- Pagination,Search,Filter(Autofilterer)
 - Net Core Identity with JWT Authentication,Refresh Token
 - Role Based Authorization
 - Database Seeding
