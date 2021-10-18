@@ -246,6 +246,7 @@ watch(
     delete query.value["Sort"];
     delete query.value["SortBy"];
     selectedsortoption.value=null;
+    selectedvalues.value=[];	
     getProducts();
   }
 );
