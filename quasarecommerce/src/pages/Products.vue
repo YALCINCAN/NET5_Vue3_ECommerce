@@ -3,8 +3,8 @@
   <q-page class="container q-pa-lg">
     <div class="row q-col-gutter-md justify-center">
       <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 q-mb-md">
-         <div class="q-mb-sm">
-           <q-select
+        <div class="q-mb-sm">
+          <q-select
             v-model="selectedsortoption"
             :options="sortoptions"
             emit-value
@@ -14,19 +14,20 @@
             option-label="label"
             label="Sort By Price"
           />
-         </div>
+        </div>
         <div class="q-mb-sm">
           <q-toolbar class="bg-primary text-white shadow-2">
             <q-toolbar-title>Brands</q-toolbar-title>
+            <q-item-label v-if="selectedbrands.length > 0" @click="resetBrand()"
+              ><i class="fas fa-times float-right" style="color: red"
+                ><q-tooltip>Remove Filter</q-tooltip></i
+              ></q-item-label
+            >
           </q-toolbar>
           <q-list bordered>
             <q-item tag="label" v-for="(brand, index) in brands" :key="index">
               <q-item-section avatar>
-                <q-radio
-                  v-model="selectedbrands"
-                  :val="brand"
-                  color="blue"
-                />
+                <q-radio v-model="selectedbrands" :val="brand" color="blue" />
               </q-item-section>
               <q-item-section>
                 <q-item-label>{{ brand }}</q-item-label>
@@ -37,6 +38,11 @@
         <div class="q-mb-sm">
           <q-toolbar class="bg-primary text-white shadow-2">
             <q-toolbar-title>Price</q-toolbar-title>
+            <q-item-label v-if="selectedprice.length > 0" @click="resetPrice()"
+              ><i class="fas fa-times float-right" style="color: red"
+                ><q-tooltip>Remove Filter</q-tooltip></i
+              ></q-item-label
+            >
           </q-toolbar>
           <q-list bordered>
             <q-item tag="label">
@@ -92,6 +98,13 @@
               </q-item-section>
             </q-item>
           </q-list>
+        </div>
+        <div class="q-mb-sm" v-if="selectedvalues.length > 0 && selectedvalues">
+          <div class="row justify-center" @click="resetOptionValueFilters()">
+            <i class="fas fa-trash" style="color:red">
+              <q-tooltip>Remove All Option Filters</q-tooltip>
+            </i>
+          </div>
         </div>
         <div
           class="q-mb-sm"
@@ -153,12 +166,12 @@ const route = useRoute();
 const selectedvalues = ref([]);
 const selectedbrands = ref([]);
 const selectedprice = ref([]);
-const selectedsortoption=ref(null);
+const selectedsortoption = ref(null);
 const query = ref({
   page: parseInt(route.query.page) || 1,
   pageSize: parseInt(route.query.pagesize) || 3,
   "category.slug": route.query["category.slug"] || "",
-  "search": route.query["search"] || "",
+  search: route.query["search"] || "",
   "ProductOptionValues.OptionValue.Value": [],
   "brand.name": [],
 });
@@ -169,9 +182,9 @@ const sortoptions = [
     value: "Ascending",
   },
   {
-    label:"Price Descending",
-    value:"Descending"
-  }
+    label: "Price Descending",
+    value: "Descending",
+  },
 ];
 const products = ref([]);
 const options = ref({});
@@ -183,7 +196,10 @@ const totalpage = computed(() => {
 
 getProducts();
 function getProducts() {
-  const q = qs.stringify(query.value, { arrayFormat: "repeat" ,format: 'RFC1738'});
+  const q = qs.stringify(query.value, {
+    arrayFormat: "repeat",
+    format: "RFC1738",
+  });
   api.get("products/getproducts/" + "?" + q).then((response) => {
     if (response && response.data && response.data.data) {
       products.value = response.data.data;
@@ -218,7 +234,18 @@ function setPrice(minprice, maxprice) {
   query.value["Price.Min"] = minprice;
   query.value["Price.Max"] = maxprice;
 }
+function resetBrand() {
+  selectedbrands.value = [];
+}
+function resetPrice() {
+  delete query.value["Price.Min"];
+  delete query.value["Price.Max"];
+  selectedprice.value = [];
+}
 
+function resetOptionValueFilters() {
+  selectedvalues.value = [];
+}
 watch(
   () => query.value.page,
   () => {
@@ -238,20 +265,21 @@ watch(
     query.value.pageSize = 3;
     query.value["ProductOptionValues.OptionValue.Value"] = [];
     query.value["brand.name"] = [];
-    selectedbrands.value=[];
+    selectedbrands.value = [];
     delete query.value["Sort"];
     delete query.value["SortBy"];
-    selectedsortoption.value=null;
-    selectedvalues.value=[];
+    selectedsortoption.value = null;
+    selectedvalues.value = [];
+    selectedprice.value=[];
     getProducts();
   }
 );
 
 watch(
-  () => route.query['search'],
+  () => route.query["search"],
   () => {
     selectedprice.value = null;
-    query.value['search']=route.query['search']
+    query.value["search"] = route.query["search"];
     delete query.value["Price.Min"];
     delete query.value["Price.Max"];
     query.value.page = 1;
@@ -260,7 +288,7 @@ watch(
     query.value["brand.name"] = [];
     delete query.value["Sort"];
     delete query.value["SortBy"];
-    selectedsortoption.value=null;
+    selectedsortoption.value = null;
     getProducts();
   }
 );
@@ -302,17 +330,16 @@ watch(
 watch(
   () => selectedsortoption.value,
   () => {
-   if(selectedsortoption.value!=null){
-    query.value["brand.name"] = selectedbrands.value;
-    query.value["Sort"]="Price";
-    query.value["SortBy"]=selectedsortoption.value;
-    getProducts();
-   }
-   else{
-     delete query.value["Sort"];
-     delete query.value["SortBy"];
-     getProducts();
-   }
+    if (selectedsortoption.value != null) {
+      query.value["brand.name"] = selectedbrands.value;
+      query.value["Sort"] = "Price";
+      query.value["SortBy"] = selectedsortoption.value;
+      getProducts();
+    } else {
+      delete query.value["Sort"];
+      delete query.value["SortBy"];
+      getProducts();
+    }
   }
 );
 </script>
