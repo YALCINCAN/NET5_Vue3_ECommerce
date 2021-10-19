@@ -16,10 +16,10 @@ namespace Entities.DTOs.Filters
         public Range<decimal> Price { get; set; }
         public CategoryFilter Category { get; set; }
         public BrandFilter Brand { get; set; }
+	[IgnoreFilter]
         public ProductOptionValueFilter ProductOptionValues { get; set; }
         [IgnoreFilter]
         public string Search { get; set; }
-
         [IgnoreFilter]
         public int Page { get; set; }
         [IgnoreFilter]
