@@ -22,7 +22,7 @@
           <q-list bordered>
             <q-item tag="label" v-for="(brand, index) in brands" :key="index">
               <q-item-section avatar>
-                <q-checkbox
+                <q-radio
                   v-model="selectedbrands"
                   :val="brand"
                   color="blue"
@@ -108,7 +108,7 @@
               :key="optionvalue.id"
             >
               <q-item-section avatar>
-                <q-checkbox
+                <q-radio
                   v-model="selectedvalues"
                   :val="optionvalue.value"
                   color="blue"
@@ -145,16 +145,11 @@
 import { ref, computed, watch } from "vue";
 import { api } from "boot/axios";
 import { useRoute } from "vue-router";
-import { useQuasar } from "quasar";
 import Categories from "src/components/Category.vue";
 import Product from "src/components/Product.vue";
 import qs from "qs";
 
 const route = useRoute();
-const $q = useQuasar();
-const ifltsm = computed(() => {
-  return $q.screen.lt.sm ? "justify-center" : "";
-});
 const selectedvalues = ref([]);
 const selectedbrands = ref([]);
 const selectedprice = ref([]);
@@ -243,10 +238,11 @@ watch(
     query.value.pageSize = 3;
     query.value["ProductOptionValues.OptionValue.Value"] = [];
     query.value["brand.name"] = [];
+    selectedbrands.value=[];
     delete query.value["Sort"];
     delete query.value["SortBy"];
     selectedsortoption.value=null;
-    selectedvalues.value=[];	
+    selectedvalues.value=[];
     getProducts();
   }
 );
