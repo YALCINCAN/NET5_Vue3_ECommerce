@@ -101,14 +101,14 @@
         </div>
         <div class="q-mb-sm" v-if="selectedvalues.length > 0 && selectedvalues">
           <div class="row justify-center" @click="resetOptionValueFilters()">
-            <i class="fas fa-trash" style="color:red">
+            <i class="fas fa-trash" style="color: red">
               <q-tooltip>Remove All Option Filters</q-tooltip>
             </i>
           </div>
         </div>
         <div
           class="q-mb-sm"
-          v-for="(option, index) in options.options"
+          v-for="(option, index) in options"
           :key="index"
         >
           <q-toolbar class="bg-primary text-white shadow-2">
@@ -218,8 +218,24 @@ function getOptionsWithValuesByCategory() {
   const slug = route.query["category.slug"];
   if (slug != null) {
     api.get("categories/" + slug + "/optionsvalues").then((response) => {
+      console.log(response.data.data.options);
+      console.log(response.data.data.options.map((option) => {
+        return {
+          ...option,
+          optionValues: option.optionValues.filter(
+            (option) => option.value !="-"
+          ),
+        };
+      }))
       if (response && response.data && response.data.success) {
-        options.value = response.data.data;
+        options.value=response.data.data.options.map((option) => {
+        return {
+          ...option,
+          optionValues: option.optionValues.filter(
+            (option) => option.value !="-"
+          ),
+        };
+      })
       }
     });
   }
@@ -270,7 +286,7 @@ watch(
     delete query.value["SortBy"];
     selectedsortoption.value = null;
     selectedvalues.value = [];
-    selectedprice.value=[];
+    selectedprice.value = [];
     getProducts();
   }
 );
