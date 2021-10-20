@@ -218,15 +218,6 @@ function getOptionsWithValuesByCategory() {
   const slug = route.query["category.slug"];
   if (slug != null) {
     api.get("categories/" + slug + "/optionsvalues").then((response) => {
-      console.log(response.data.data.options);
-      console.log(response.data.data.options.map((option) => {
-        return {
-          ...option,
-          optionValues: option.optionValues.filter(
-            (option) => option.value !="-"
-          ),
-        };
-      }))
       if (response && response.data && response.data.success) {
         options.value=response.data.data.options.map((option) => {
         return {
