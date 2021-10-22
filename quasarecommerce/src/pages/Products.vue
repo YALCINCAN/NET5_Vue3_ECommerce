@@ -117,11 +117,11 @@
           <q-list bordered>
             <q-item
               tag="label"
-              v-for="optionvalue in option.optionValues"
-              :key="optionvalue.id"
+              v-for="(optionvalue,index) in option.optionValues"
+              :key="index"
             >
               <q-item-section avatar>
-                <q-radio
+                <q-checkbox
                   v-model="selectedvalues"
                   :val="optionvalue.value"
                   color="blue"

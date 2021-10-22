@@ -69,7 +69,7 @@ namespace Core.Utilities.Extensions
                 {
                     exceptions.Add(e.InnerException.Message);
                 }
-                if (e.InnerException.InnerException.Message != null)
+                else if (e.InnerException.InnerException.Message != null)
                 {
                     exceptions.Add(e.InnerException.InnerException.Message);
                 }
