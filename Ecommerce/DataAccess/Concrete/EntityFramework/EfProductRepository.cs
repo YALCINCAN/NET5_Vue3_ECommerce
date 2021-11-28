@@ -13,6 +13,7 @@ using Entities.DTOs.Filters;
 using AutoFilterer.Extensions;
 using Core.Utilities;
 using LinqKit;
+using System.Linq.Expressions;
 
 namespace DataAccess.Concrete.EntityFramework
 {
@@ -109,7 +110,7 @@ namespace DataAccess.Concrete.EntityFramework
             return product;
         }
 
-         public IQueryable<ProductWithMainImage> GetProductsWithImage(ProductFilter filter)
+        public IQueryable<ProductWithMainImage> GetProductsWithImage(ProductFilter filter)
         {
             if (!string.IsNullOrEmpty(filter.Search))
             {
@@ -124,7 +125,7 @@ namespace DataAccess.Concrete.EntityFramework
                                         BrandName = product.Brand.Name,
                                         Slug = product.Slug,
                                         MainImage = product.MainImage,
-                                        RatingAverage = product.Reviews.Select(review => Convert.ToInt32(review.RatingValue)).Cast<decimal>().Average()
+                                        RatingAverage = product.Reviews.Select(review => (int?)(review.RatingValue)).Cast<decimal>().Average()
                                     }).AsQueryable();
             }
             else if (filter.ProductOptionValues!=null)
@@ -142,7 +143,7 @@ namespace DataAccess.Concrete.EntityFramework
                     BrandName = product.Brand.Name,
                     Slug = product.Slug,
                     MainImage = product.MainImage,
-                    RatingAverage = product.Reviews.Select(review => Convert.ToInt32(review.RatingValue)).Cast<decimal>().Average()
+                    RatingAverage = product.Reviews.Select(review => (int?)(review.RatingValue)).Cast<decimal>().Average()
                 }).AsQueryable();
             }
             else
@@ -156,7 +157,7 @@ namespace DataAccess.Concrete.EntityFramework
                     BrandName = product.Brand.Name,
                     Slug = product.Slug,
                     MainImage = product.MainImage,
-                    RatingAverage = product.Reviews.Select(review => Convert.ToInt32(review.RatingValue)).Cast<decimal>().Average()
+                    RatingAverage = product.Reviews.Select(review => (int?)(review.RatingValue)).Cast<decimal>().Average()
                 }).AsQueryable();
             }
         }
@@ -172,7 +173,7 @@ namespace DataAccess.Concrete.EntityFramework
                 BrandName = product.Brand.Name,
                 Slug = product.Slug,
                 MainImage = product.MainImage,
-                RatingAverage = product.Reviews.Select(review => Convert.ToInt32(review.RatingValue)).Cast<decimal>().Average()
+                RatingAverage = product.Reviews.Select(review => (int?)(review.RatingValue)).Cast<decimal>().Average()
             }).OrderByDescending(x => x.Id).Take(10).ToListAsync();
         }
 
