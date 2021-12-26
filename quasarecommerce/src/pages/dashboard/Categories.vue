@@ -79,7 +79,7 @@
               />
               <q-btn
                 dense
-                @click="removeCateogry(props.row.id)"
+                @click="removeCategory(props.row.id)"
                 color="red"
                 icon="delete"
               />
@@ -271,7 +271,7 @@ function updateCategory() {
     }
   });
 }
-function removeCateogry(id) {
+function removeCategory(id) {
   store.dispatch("category/removeCategory", id).then((response) => {
     if (response && response.success) {
       $q.notify({
