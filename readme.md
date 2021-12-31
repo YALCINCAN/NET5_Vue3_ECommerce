@@ -19,8 +19,8 @@
 For asp net core, you must edit the appsettings.json file before typing these commands. 
 
 ```sh
-dotnet ef migrations add CreateDatabase --project "DataAccess" --startup-project "WebAPI"
-dotnet ef database update --project "DataAccess" --startup-project "WebAPI"
+dotnet ef migrations add CreateDatabase --context ECommerceContext --project "DataAccess" --startup-project "WebAPI"
+dotnet ef database update --context ECommerceContext --project "DataAccess" --startup-project "WebAPI"
 ```
 After these commands, a database will be created. 
 Default Admin Account : 
