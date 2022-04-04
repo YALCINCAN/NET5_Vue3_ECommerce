@@ -12,7 +12,7 @@
 - Database Seeding
 - Custom Exception Handling Middleware
 - Complete User Management  (Register / Generate Token / Forgot Password / Confirmation Mail)
-- Logging (Serilog),Caching (Memory,Redis),Validation (Fluent Validation),Transaction,Exception,Performance with Aspects (Autofac,Castle.DynamicProxy)
+- Logging (Serilog),Memory Caching,Validation (Fluent Validation),Transaction,Exception,Performance with Aspects (Autofac,Castle.DynamicProxy)
 
 ## How To Start Asp Net Core API
 
