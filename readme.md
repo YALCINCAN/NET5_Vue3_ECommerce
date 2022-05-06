@@ -1,4 +1,4 @@
-# ASP NET Core with VueJS 3 Composition API (Quasar Framework) ECommerce Project
+# .NET5 with VueJS 3 Composition API (Quasar Framework) ECommerce Project
 
 <img alt="Ecommerce Gif" src="assets/Ecommercelast.gif"> </img>
 
