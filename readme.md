@@ -2,11 +2,15 @@
 
 <img alt="Ecommerce Gif" src="assets/Ecommercelast.gif"> </img>
 
-## Features
+**<h2 align="center">Features</p>**
+
+## Backend
+- .NET5
 - Entity Framework Core – Code First 
 - Response Wrappers
 - Repository Pattern
 - Action Filters
+- Automapper
 - Pagination,Search,Filter(Autofilterer)
 - Net Core Identity with JWT Authentication,Refresh Token
 - Role Based Authorization
@@ -14,6 +18,14 @@
 - Custom Exception Handling Middleware
 - Complete User Management  (Register / Generate Token / Forgot Password / Confirmation Mail)
 - Logging (Serilog),Memory Caching,Validation (Fluent Validation),Transaction,Exception,Performance with Aspects (Autofac,Castle.DynamicProxy)
+
+## Frontend
+- Vue3
+- Composition API
+- Vuelidate
+- Vuex
+- Route guards
+- Dashboard
 
 ## How To Start Asp Net Core API
 
