@@ -1,6 +1,6 @@
 # .NET5 with VueJS 3 Composition API (Quasar Framework) ECommerce Project
 
-<img alt="Ecommerce Gif" src="assets/Ecommercelast.gif"> </img>
+<img alt="Ecommerce Gif" src="assets/ecommerce.gif"> </img>
 
 **<h2 align="center">Features</p>**
 
